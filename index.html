@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Aurelia Eau de Parfum | Glitter Bliss Vestiti</title>
+<title>Glitter Bliss Vestiti | Perfumes & Fashion</title>
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -106,8 +104,8 @@
     </script>
 <style>
         body {
-            background-color: #fbf9f9; /* surface */
-            color: #1b1c1c; /* on-surface */
+            background-color: #fbf9f9;
+            color: #1b1c1c;
             overflow-x: hidden;
         }
         .material-symbols-outlined {
@@ -131,190 +129,183 @@
             opacity: 1;
             transform: translateY(0);
         }
-        .size-btn.active {
+        .filter-btn.active {
             background-color: #1b1c1c;
             color: #ffffff;
             border-color: #1b1c1c;
+        }
+        .modal-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-panel {
+            transform: translateY(24px);
+            transition: transform 0.35s ease;
+        }
+        .modal-overlay.open .modal-panel {
+            transform: translateY(0);
+        }
+        .product-card:hover .product-img {
+            transform: scale(1.06);
         }
     </style>
 </head>
 <body class="font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container">
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant/30">
-<div class="flex justify-between items-center h-20 px-margin-desktop max-w-container-max mx-auto">
-<a class="font-headline-sm text-headline-sm text-primary dark:text-primary-fixed-dim tracking-tighter cursor-pointer transition-opacity active:opacity-70" href="#">
+<div class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<a class="font-headline-sm text-headline-sm text-primary dark:text-primary-fixed-dim tracking-tighter cursor-pointer transition-opacity active:opacity-70" href="#top">
                 Glitter Bliss Vestiti
             </a>
 <div class="hidden md:flex gap-10 items-center">
-<a class="font-label-caps text-label-caps uppercase tracking-widest text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#">Collections</a>
-<a class="font-label-caps text-label-caps uppercase tracking-widest text-primary dark:text-primary-fixed-dim border-b border-primary hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#">Fragrances</a>
-<a class="font-label-caps text-label-caps uppercase tracking-widest text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#">The Atelier</a>
-<a class="font-label-caps text-label-caps uppercase tracking-widest text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#">Our Story</a>
+<a class="font-label-caps text-label-caps uppercase tracking-widest text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#shop">Shop</a>
+<a class="font-label-caps text-label-caps uppercase tracking-widest text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#about">About Us</a>
+<a class="font-label-caps text-label-caps uppercase tracking-widest text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#contact">Contact</a>
 </div>
 <div class="flex items-center gap-6">
-<button class="material-symbols-outlined text-on-surface hover:text-primary transition-colors cursor-pointer">shopping_bag</button>
-<button class="md:hidden material-symbols-outlined text-on-surface">menu</button>
+<a aria-label="Chat with us on WhatsApp" class="material-symbols-outlined text-on-surface hover:text-primary transition-colors cursor-pointer" href="https://wa.me/2348167559341" target="_blank">chat</a>
+<button class="md:hidden material-symbols-outlined text-on-surface" id="mobile-menu-btn">menu</button>
 </div>
+</div>
+<div class="md:hidden hidden flex-col gap-4 px-margin-mobile pb-6 bg-surface" id="mobile-menu">
+<a class="font-label-caps text-label-caps uppercase tracking-widest text-secondary" href="#shop">Shop</a>
+<a class="font-label-caps text-label-caps uppercase tracking-widest text-secondary" href="#about">About Us</a>
+<a class="font-label-caps text-label-caps uppercase tracking-widest text-secondary" href="#contact">Contact</a>
 </div>
 </nav>
-<main class="pt-20">
-<!-- Hero Product Section -->
-<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-<!-- Image Side -->
-<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low group">
-<img alt="Aurelia Eau de Parfum" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM7WW2rNs9nkQQcatFMua0cH2KL1nlJIw-nfrybwzq1ItjeaQuhWGid7CL9oVflRDWIABpE3yNzeD71yUAUgpiJbPnqwFcePwDfcF_CZdluMTacSjWbx45U24Q-Z8Rq6YnlbtSFjyLVaTL4YYpeC4TReMHmxSR1boyi1kMSBWuNDkKzjhJEGZ-47TIxGy7UUtsL1NitB3HpcsUh05_zKHBlyASHjur-6SRIA7bMoc85c8dPYaa7_Fi"/>
-<div class="absolute inset-0 bg-gradient-to-t from-surface/20 to-transparent pointer-events-none"></div>
-</div>
-<!-- Details Side -->
-<div class="flex flex-col justify-center h-full space-y-8">
-<div class="space-y-4">
-<p class="font-label-caps text-label-caps text-primary tracking-[0.2em] uppercase">Signature Fragrance</p>
-<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">Aurelia Eau de Parfum</h1>
-<p class="font-headline-sm text-headline-sm text-secondary">€185.00</p>
-</div>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg italic">
-                    "A symphony of golden amber and celestial florals, Aurelia is the essence of timeless radiance."
+<main class="pt-20" id="top">
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div class="flex flex-col justify-center space-y-8 order-2 md:order-1">
+<p class="font-label-caps text-label-caps text-primary tracking-[0.2em] uppercase">Lagos, Nigeria</p>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">Fragrance &amp; Fashion, Curated For You</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                    From signature perfumes to everyday wear for men, women and children — every piece is chosen with care, and every order is just a WhatsApp message away.
                 </p>
-<!-- Size Selection -->
-<div class="space-y-4">
-<p class="font-label-caps text-label-caps uppercase text-secondary">Select Size</p>
-<div class="flex gap-4">
-<button class="size-btn active font-button text-button px-8 py-3 border border-outline transition-all duration-300 hover:border-on-surface" onclick="selectSize(this)">50ml</button>
-<button class="size-btn font-button text-button px-8 py-3 border border-outline transition-all duration-300 hover:border-on-surface" onclick="selectSize(this)">100ml</button>
-</div>
-</div>
-<!-- Action -->
-<div class="pt-6">
-<button class="group relative w-full md:w-auto font-button text-button bg-on-background text-on-primary py-5 px-16 uppercase tracking-widest overflow-hidden transition-all hover:bg-primary active:scale-95">
-<span class="relative z-10">Add to Cart</span>
-<div class="absolute inset-0 bg-primary-container/20 translate-y-full transition-transform group-hover:translate-y-0"></div>
-</button>
-</div>
-<!-- Utility Links -->
-<div class="flex gap-8 pt-8 border-t border-outline-variant/30">
-<div class="flex items-center gap-2 group cursor-pointer">
-<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors">local_shipping</span>
-<span class="font-label-caps text-label-caps uppercase text-secondary group-hover:text-on-surface">Complimentary Shipping</span>
-</div>
-<div class="flex items-center gap-2 group cursor-pointer">
-<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors">feature_search</span>
-<span class="font-label-caps text-label-caps uppercase text-secondary group-hover:text-on-surface">Artisanal Packaging</span>
-</div>
-</div>
-</div>
-</section>
-<!-- Olfactory Notes Section -->
-<section class="bg-surface-container py-section-gap">
-<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
-<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-16 reveal-on-scroll">The Fragrance Composition</h2>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-gutter">
-<!-- Top Notes -->
-<div class="flex flex-col items-center space-y-4 reveal-on-scroll" style="transition-delay: 100ms">
-<div class="w-16 h-16 rounded-full border border-outline-variant flex items-center justify-center mb-4">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1">water_drop</span>
-</div>
-<h3 class="font-label-caps text-label-caps uppercase tracking-widest text-primary">Top Notes</h3>
-<p class="font-headline-sm text-headline-sm text-on-surface">Bergamot, Pink Pepper</p>
-<p class="font-body-md text-body-md text-secondary max-w-xs">The initial burst of sparkling citrus tempered by subtle spicy nuances.</p>
-</div>
-<!-- Heart Notes -->
-<div class="flex flex-col items-center space-y-4 reveal-on-scroll" style="transition-delay: 200ms">
-<div class="w-16 h-16 rounded-full border border-outline-variant flex items-center justify-center mb-4">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1">local_florist</span>
-</div>
-<h3 class="font-label-caps text-label-caps uppercase tracking-widest text-primary">Heart Notes</h3>
-<p class="font-headline-sm text-headline-sm text-on-surface">Damask Rose, Jasmine Sambac</p>
-<p class="font-body-md text-body-md text-secondary max-w-xs">A sophisticated floral core that defines the romantic spirit of Aurelia.</p>
-</div>
-<!-- Base Notes -->
-<div class="flex flex-col items-center space-y-4 reveal-on-scroll" style="transition-delay: 300ms">
-<div class="w-16 h-16 rounded-full border border-outline-variant flex items-center justify-center mb-4">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1">forest</span>
-</div>
-<h3 class="font-label-caps text-label-caps uppercase tracking-widest text-primary">Base Notes</h3>
-<p class="font-headline-sm text-headline-sm text-on-surface">Amber, Sandalwood, Vanilla</p>
-<p class="font-body-md text-body-md text-secondary max-w-xs">A warm, enduring trail that lingers elegantly throughout the day.</p>
-</div>
-</div>
-</div>
-</section>
-<!-- The Atelier section -->
-<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap overflow-hidden">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-<div class="reveal-on-scroll">
-<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-8">The Atelier</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-8">
-                        Each bottle of Aurelia is hand-assembled in our historic Grasse atelier. Our master perfumers employ centuries-old distillation techniques to extract the purest essences from Damask roses harvested at dawn. 
-                    </p>
-<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-                        The heavy glass flacon, adorned with a 24k gold-plated cap, reflects the uncompromising craftsmanship that defines the Glitter Bliss Vestiti legacy. This is more than a scent; it is a wearable piece of art.
-                    </p>
-<div class="mt-12">
-<a class="inline-flex items-center gap-2 font-label-caps text-label-caps uppercase tracking-widest text-primary hover:gap-4 transition-all" href="#">
-                            Discover our craft <span class="material-symbols-outlined">arrow_right_alt</span>
+<div class="pt-2">
+<a class="inline-block group relative w-full md:w-auto font-button text-button bg-on-background text-on-primary py-5 px-16 uppercase tracking-widest overflow-hidden transition-all hover:bg-primary active:scale-95 text-center" href="#shop">
+<span class="relative z-10">Shop The Collection</span>
 </a>
 </div>
 </div>
-<div class="relative reveal-on-scroll" style="transition-delay: 200ms">
-<div class="aspect-[4/5] bg-surface-container overflow-hidden">
-<div class="w-full h-full bg-cover bg-center" data-alt="A close-up shot of a master perfumer's hands working in a sunlit, historic workshop in Grasse. Antique glass vials, bundles of dried lavender, and gold tools are scattered across a dark wooden table. The lighting is ethereal and warm, suggesting a high-end luxury brand aesthetic with soft focus on the background." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB1zYuLD32M2hsS0HohPcFwGYpNY8FLxaTjkN-bJowRE9urEP_cB2dS_1xIhQ6kl1sV_StTp_GHnvh2xDEZN-VrduD18qPHQ3OU2-g8Ov0htbourU_n5O-BvM3jNSz8bfCs5BGiXEhjByNdDop9DhKGilXjtX5k7ua6xGOJFn2V1tdeDQi9IyR3BZDCNbALXmXPtK6LnlR6toVAZpTFZ4CfwPRsj8bwmUcA6scC3IsrQUYwiquKCApM')"></div>
+<div class="relative aspect-[3/4] overflow-hidden bg-surface-container-low group order-1 md:order-2">
+<img alt="Glitter Bliss Vestiti perfume and fashion pieces" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" src="https://picsum.photos/seed/gbv-hero/900/1200"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface/20 to-transparent pointer-events-none"></div>
 </div>
-<div class="absolute -bottom-8 -left-8 w-48 h-48 bg-primary/10 -z-10"></div>
+</section>
+
+<!-- About Us Section -->
+<section class="bg-surface-container py-section-gap" id="about">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div class="reveal-on-scroll">
+<div class="aspect-[4/5] bg-surface-container-low overflow-hidden">
+<img alt="Glitter Bliss Vestiti store based in Nigeria" class="w-full h-full object-cover" src="https://picsum.photos/seed/gbv-about/800/1000"/>
+</div>
+</div>
+<div class="reveal-on-scroll" style="transition-delay: 100ms">
+<p class="font-label-caps text-label-caps text-primary tracking-[0.2em] uppercase mb-4">About Us</p>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-8">Who We Are</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-6">
+                    Glitter Bliss Vestiti is a Nigerian-owned lifestyle store bringing you two things we love: beautiful fragrances and quality clothing. We are proudly based in Nigeria and serve customers across the country.
+                </p>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-6">
+                    Our catalogue is split into two collections. Our <span class="text-on-surface font-medium">Fragrance Collection</span> features carefully selected eau de parfums for every occasion. Our <span class="text-on-surface font-medium">Fashion Collection</span> covers wear for men, women and children — from everyday casual pieces to statement outfits for special occasions.
+                </p>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-6">
+                    We keep things simple: there's no account to create and no sign-up required. Browse the store, tap on anything you like to see full details, and reach out to us directly on WhatsApp to place your order. We reply personally to every message and can help with sizing, availability and delivery across Nigeria.
+                </p>
+<div class="flex items-center gap-3 pt-2">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span class="font-body-md text-body-md text-on-surface">Based in Nigeria &middot; Nationwide delivery</span>
+</div>
 </div>
 </div>
 </section>
-<!-- You May Also Like -->
-<section class="bg-surface py-section-gap">
-<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-<div class="flex justify-between items-end mb-12">
-<h2 class="font-headline-md text-headline-md">You May Also Like</h2>
-<a class="font-label-caps text-label-caps uppercase tracking-widest text-secondary hover:text-primary transition-colors" href="#">View All</a>
+
+<!-- Shop Section -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-section-gap" id="shop">
+<div class="text-center mb-12 reveal-on-scroll">
+<p class="font-label-caps text-label-caps text-primary tracking-[0.2em] uppercase mb-4">The Collection</p>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg">Shop Perfumes &amp; Fashion</h2>
+<p class="font-body-md text-body-md text-secondary mt-4 max-w-xl mx-auto">Tap any item to view details, pricing and to contact us on WhatsApp to order.</p>
 </div>
-<div class="flex gap-gutter overflow-x-auto custom-scrollbar pb-8 snap-x snap-mandatory">
-<!-- Product 1 -->
-<div class="flex-none w-72 md:w-[calc(33.33%-16px)] snap-start group cursor-pointer">
-<div class="aspect-[3/4] bg-surface-container-low mb-6 overflow-hidden">
-<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A luxury perfume bottle with a deep amber liquid, named 'Ambre Nuit'. The design is sleek and minimalist with charcoal accents, presented on a polished marble surface with soft, warm golden lighting reflecting the opulent brand identity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCI0WrCURNOoCaC6oA407tZEx66iXjNDlDaxp9CgBzzXV7LhBatCddKVbK5TBuA7B8kfZ9EOJ8Rm00S3i_x5uU-yvUsZ8zWUV1kSne_u41vD87Z6UthXNsnE8LvgZqn_5FRZ7IALFKjqQSfLsJx2WFdUubBHQgPzaNO3SFC-68fyYtMgAr4cB1Tch_Efdncca-W0yftO4R5CTpRN6hreSLs02Az76EgYbM9JJstIpOdOR5zEjPl1CUX')"></div>
+
+<!-- Filters -->
+<div class="flex flex-wrap justify-center gap-4 mb-14 reveal-on-scroll">
+<button class="filter-btn active font-button text-button px-6 py-3 border border-outline transition-all duration-300 hover:border-on-surface" data-filter="all" onclick="filterProducts('all', this)">All</button>
+<button class="filter-btn font-button text-button px-6 py-3 border border-outline transition-all duration-300 hover:border-on-surface" data-filter="perfume" onclick="filterProducts('perfume', this)">Perfumes</button>
+<button class="filter-btn font-button text-button px-6 py-3 border border-outline transition-all duration-300 hover:border-on-surface" data-filter="men" onclick="filterProducts('men', this)">Men</button>
+<button class="filter-btn font-button text-button px-6 py-3 border border-outline transition-all duration-300 hover:border-on-surface" data-filter="women" onclick="filterProducts('women', this)">Women</button>
+<button class="filter-btn font-button text-button px-6 py-3 border border-outline transition-all duration-300 hover:border-on-surface" data-filter="children" onclick="filterProducts('children', this)">Children</button>
 </div>
-<h3 class="font-headline-sm text-headline-sm text-center">Ambre Nuit</h3>
-<p class="font-body-md text-body-md text-center text-secondary">Eau de Parfum</p>
-<p class="font-label-caps text-label-caps text-center text-primary mt-2">€195.00</p>
-</div>
-<!-- Product 2 -->
-<div class="flex-none w-72 md:w-[calc(33.33%-16px)] snap-start group cursor-pointer">
-<div class="aspect-[3/4] bg-surface-container-low mb-6 overflow-hidden">
-<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="A sophisticated perfume bottle with a velvet-finish blue label called 'Bleu Velours'. Set in a dark, atmospheric studio with cool blue lighting and subtle gold dust particles in the air, embodying high-fashion boutique aesthetics." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBgOE6Ln_vesWsroYEa6O-6W6aRlh2KkaeVzEdSsad64tsn5S3Ll7oWfpJciApCTAU9xczkKf6vKiviYIajiYpNuZwTK3cTMBTLWUMnMNsR3_ZMD826SX2MlPBV3CBxCgtWTXcFSYIZQOXGpV_P98U57qKpxUQ9PyewOQZ-kLw6lRyP6eLK_rDSNamplnWC3Q65VqcggbM5NGfjnpkLAzj8ESimERKzua_Hxs_vbI9E5_r7i97BwOmQ')"></div>
-</div>
-<h3 class="font-headline-sm text-headline-sm text-center">Bleu Velours</h3>
-<p class="font-body-md text-body-md text-center text-secondary">Eau de Parfum</p>
-<p class="font-label-caps text-label-caps text-center text-primary mt-2">€185.00</p>
-</div>
-<!-- Product 3 -->
-<div class="flex-none w-72 md:w-[calc(33.33%-16px)] snap-start group cursor-pointer">
-<div class="aspect-[3/4] bg-surface-container-low mb-6 overflow-hidden">
-<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="An elegant, tall perfume bottle with a tailored label design named 'Satin Blazer'. The bottle is placed on a piece of rich, folded ivory silk fabric, illuminated by soft morning light to create a hushed luxury vibe." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBlI2r5Hu3txqrUxCpKdo3Qen37x4KOmz4BoTanPAzyUiwiAE2UO0XHi2EpKrsCah-CP3TBNeQizDH6PNcgMVaA9ixU_m3Hygcm3KyjJXtmfb84qPkMZGP_G6_VYf3h5hD2ERUDTs3_2FYI3i245IiVJ2YIHbV-Z4M1q8TOZWJu7uAGog-8ABKljbuSf3qSOGXCaBE3600q7owoY8ZyP6znEKzY8-bDv5atYVEfuJ9y6TG_mARC5f12')"></div>
-</div>
-<h3 class="font-headline-sm text-headline-sm text-center">Satin Blazer</h3>
-<p class="font-body-md text-body-md text-center text-secondary">Eau de Parfum</p>
-<p class="font-label-caps text-label-caps text-center text-primary mt-2">€210.00</p>
-</div>
-</div>
-</div>
+
+<!-- Product Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-gutter" id="product-grid"></div>
 </section>
 </main>
+
+<!-- Contact Section -->
+<section class="bg-surface-container py-section-gap" id="contact">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-16">
+<div class="reveal-on-scroll">
+<p class="font-label-caps text-label-caps text-primary tracking-[0.2em] uppercase mb-4">Get In Touch</p>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-8">Order or Ask a Question</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed mb-8">
+                    Fill in the form and it will open WhatsApp with your message ready to send straight to us. You can also message us directly.
+                </p>
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">call</span>
+<a class="font-body-md text-body-md text-on-surface hover:text-primary" href="https://wa.me/2348167559341" target="_blank">0816 755 9341 (WhatsApp)</a>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span class="font-body-md text-body-md text-on-surface">Nigeria &middot; Nationwide Delivery</span>
+</div>
+</div>
+<div class="reveal-on-scroll bg-surface p-8 md:p-10" style="transition-delay: 100ms">
+<form class="space-y-6" id="contact-form">
+<div>
+<label class="font-label-caps text-label-caps uppercase text-secondary block mb-2" for="cf-name">Full Name</label>
+<input class="w-full border border-outline bg-surface px-4 py-3 font-body-md text-body-md focus:outline-none focus:border-primary" id="cf-name" placeholder="Your name" required="" type="text"/>
+</div>
+<div>
+<label class="font-label-caps text-label-caps uppercase text-secondary block mb-2" for="cf-phone">Phone Number</label>
+<input class="w-full border border-outline bg-surface px-4 py-3 font-body-md text-body-md focus:outline-none focus:border-primary" id="cf-phone" placeholder="Your phone number" required="" type="tel"/>
+</div>
+<div>
+<label class="font-label-caps text-label-caps uppercase text-secondary block mb-2" for="cf-item">Item You're Interested In (optional)</label>
+<input class="w-full border border-outline bg-surface px-4 py-3 font-body-md text-body-md focus:outline-none focus:border-primary" id="cf-item" placeholder="e.g. Aurelia Eau de Parfum" type="text"/>
+</div>
+<div>
+<label class="font-label-caps text-label-caps uppercase text-secondary block mb-2" for="cf-message">Message</label>
+<textarea class="w-full border border-outline bg-surface px-4 py-3 font-body-md text-body-md focus:outline-none focus:border-primary" id="cf-message" placeholder="Tell us what you'd like to order or ask" required="" rows="4"></textarea>
+</div>
+<button class="group relative w-full font-button text-button bg-on-background text-on-primary py-5 px-8 uppercase tracking-widest overflow-hidden transition-all hover:bg-primary active:scale-95" type="submit">
+<span class="relative z-10">Send via WhatsApp</span>
+</button>
+</form>
+</div>
+</div>
+</section>
+
 <!-- Footer -->
 <footer class="bg-surface-container dark:bg-surface-container-high border-t border-outline-variant/20 w-full py-section-gap">
 <div class="flex flex-col items-center gap-8 px-margin-desktop max-w-container-max mx-auto text-center">
 <div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim">Glitter Bliss Vestiti</div>
 <div class="flex flex-wrap justify-center gap-x-12 gap-y-4">
-<a class="font-body-md text-body-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 underline-offset-4 hover:underline" href="#">Privacy Policy</a>
-<a class="font-body-md text-body-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 underline-offset-4 hover:underline" href="#">Terms of Service</a>
-<a class="font-body-md text-body-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 underline-offset-4 hover:underline" href="#">Shipping &amp; Returns</a>
-<a class="font-body-md text-body-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 underline-offset-4 hover:underline" href="#">Contact Us</a>
+<button class="font-body-md text-body-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 underline-offset-4 hover:underline" onclick="openInfoModal('privacy')">Privacy Policy</button>
+<button class="font-body-md text-body-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 underline-offset-4 hover:underline" onclick="openInfoModal('terms')">Terms of Service</button>
+<button class="font-body-md text-body-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 underline-offset-4 hover:underline" onclick="openInfoModal('shipping')">Shipping &amp; Returns</button>
+<button class="font-body-md text-body-md text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 underline-offset-4 hover:underline" onclick="openInfoModal('contact')">Contact Us</button>
 </div>
 <div class="flex gap-6 mt-4">
+<a aria-label="WhatsApp" class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary" href="https://wa.me/2348167559341" target="_blank">chat</a>
 <span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary">public</span>
-<span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary">flutter_dash</span>
 <span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary">camera</span>
 </div>
 <p class="font-body-md text-body-md text-on-surface dark:text-on-surface-variant opacity-60 mt-8">
@@ -322,38 +313,227 @@
             </p>
 </div>
 </footer>
+
+<!-- Product Modal -->
+<div class="modal-overlay fixed inset-0 z-[60] bg-inverse-surface/60 backdrop-blur-sm flex items-end md:items-center justify-center p-0 md:p-6" id="product-modal">
+<div class="modal-panel bg-surface w-full md:max-w-3xl max-h-[92vh] overflow-y-auto md:rounded-lg grid grid-cols-1 md:grid-cols-2">
+<div class="relative aspect-square md:aspect-auto bg-surface-container-low overflow-hidden">
+<img alt="" class="w-full h-full object-cover" id="modal-img"/>
+<button class="absolute top-4 right-4 md:hidden material-symbols-outlined bg-surface/80 rounded-full w-9 h-9 flex items-center justify-center" onclick="closeProductModal()">close</button>
+</div>
+<div class="p-8 md:p-10 relative flex flex-col justify-center">
+<button class="hidden md:flex absolute top-6 right-6 material-symbols-outlined text-secondary hover:text-primary w-9 h-9 items-center justify-center" onclick="closeProductModal()">close</button>
+<p class="font-label-caps text-label-caps text-primary tracking-[0.2em] uppercase mb-3" id="modal-category"></p>
+<h3 class="font-headline-md text-headline-md mb-3" id="modal-name"></h3>
+<p class="font-headline-sm text-headline-sm text-secondary mb-5" id="modal-price"></p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-8" id="modal-desc"></p>
+<a class="group relative w-full font-button text-button bg-on-background text-on-primary py-5 px-8 uppercase tracking-widest overflow-hidden transition-all hover:bg-primary active:scale-95 text-center flex items-center justify-center gap-2" href="#" id="modal-whatsapp-link" target="_blank">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+<span class="relative z-10">Order On WhatsApp</span>
+</a>
+</div>
+</div>
+</div>
+
+<!-- Info Modal (Privacy / Terms / Shipping / Contact) -->
+<div class="modal-overlay fixed inset-0 z-[60] bg-inverse-surface/60 backdrop-blur-sm flex items-end md:items-center justify-center p-0 md:p-6" id="info-modal">
+<div class="modal-panel bg-surface w-full md:max-w-xl max-h-[85vh] overflow-y-auto md:rounded-lg p-8 md:p-10 relative">
+<button class="absolute top-6 right-6 material-symbols-outlined text-secondary hover:text-primary w-9 h-9 flex items-center justify-center" onclick="closeInfoModal()">close</button>
+<p class="font-label-caps text-label-caps text-primary tracking-[0.2em] uppercase mb-3" id="info-eyebrow"></p>
+<h3 class="font-headline-md text-headline-md mb-6" id="info-title"></h3>
+<div class="font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-4" id="info-body"></div>
+</div>
+</div>
+
 <script>
-        // Size Selection Logic
-        function selectSize(btn) {
-            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+        const WHATSAPP_NUMBER = "2348167559341";
+
+        // ---- Product Data ----
+        const products = [
+            // Perfumes (5)
+            { id: 1, category: "perfume", name: "Aurelia Eau de Parfum", price: 85000, img: "https://picsum.photos/seed/perfume1/600/800", desc: "A symphony of golden amber and celestial florals — bergamot and pink pepper up top, a rose and jasmine heart, resting on amber, sandalwood and vanilla. 50ml." },
+            { id: 2, category: "perfume", name: "Ambre Nuit", price: 95000, img: "https://picsum.photos/seed/perfume2/600/800", desc: "A deep, smouldering amber fragrance built for evenings. Warm spice and dark woods with a long-lasting trail. 50ml." },
+            { id: 3, category: "perfume", name: "Bleu Velours", price: 88000, img: "https://picsum.photos/seed/perfume3/600/800", desc: "Cool and sophisticated, Bleu Velours blends fresh citrus with a soft musk base for an everyday signature scent. 50ml." },
+            { id: 4, category: "perfume", name: "Satin Blazer", price: 105000, img: "https://picsum.photos/seed/perfume4/600/800", desc: "An elegant, tailored fragrance with notes of iris, silk musk and cedarwood. Understated luxury in every spray. 50ml." },
+            { id: 5, category: "perfume", name: "Golden Mirage", price: 92000, img: "https://picsum.photos/seed/perfume5/600/800", desc: "A radiant floral-oriental scent with honeyed florals and a warm vanilla-amber finish. Perfect for special occasions. 50ml." },
+            // Men (7)
+            { id: 6, category: "men", name: "Classic Oxford Shirt", price: 18000, img: "https://picsum.photos/seed/men1/600/800", desc: "A crisp, well-tailored oxford shirt for men. Breathable cotton blend, available in multiple sizes and colours." },
+            { id: 7, category: "men", name: "Tailored Blazer", price: 45000, img: "https://picsum.photos/seed/men2/600/800", desc: "A sharp, structured blazer that works for the office or a night out. Slim fit with a comfortable stretch lining." },
+            { id: 8, category: "men", name: "Slim Fit Trousers", price: 22000, img: "https://picsum.photos/seed/men3/600/800", desc: "Comfortable, tapered trousers made for everyday wear. Durable fabric that holds its shape all day." },
+            { id: 9, category: "men", name: "Premium Denim Jacket", price: 30000, img: "https://picsum.photos/seed/men4/600/800", desc: "A classic denim jacket with a modern cut. Layers well over shirts and hoodies for a relaxed look." },
+            { id: 10, category: "men", name: "Casual Polo Shirt", price: 12000, img: "https://picsum.photos/seed/men5/600/800", desc: "Soft cotton pique polo shirt, perfect for casual outings and everyday comfort." },
+            { id: 11, category: "men", name: "Formal Suit Set", price: 75000, img: "https://picsum.photos/seed/men6/600/800", desc: "A complete two-piece suit set for weddings, interviews and formal events. Jacket and trousers included." },
+            { id: 12, category: "men", name: "Traditional Agbada", price: 60000, img: "https://picsum.photos/seed/men7/600/800", desc: "A beautifully finished traditional agbada for special occasions and celebrations. Made with premium native fabric." },
+            // Women (7)
+            { id: 13, category: "women", name: "Ankara Wrap Dress", price: 25000, img: "https://picsum.photos/seed/women1/600/800", desc: "A vibrant Ankara print wrap dress that flatters every shape. Great for parties and owambe events." },
+            { id: 14, category: "women", name: "Silk Evening Gown", price: 55000, img: "https://picsum.photos/seed/women2/600/800", desc: "An elegant floor-length gown in soft silk-touch fabric, designed for weddings and formal evenings." },
+            { id: 15, category: "women", name: "Casual Jumpsuit", price: 20000, img: "https://picsum.photos/seed/women3/600/800", desc: "A relaxed, comfortable jumpsuit for everyday errands or a casual day out." },
+            { id: 16, category: "women", name: "Lace Blouse", price: 15000, img: "https://picsum.photos/seed/women4/600/800", desc: "A delicate lace blouse that pairs easily with skirts, trousers or jeans for any occasion." },
+            { id: 17, category: "women", name: "Pleated Midi Skirt", price: 18000, img: "https://picsum.photos/seed/women5/600/800", desc: "A flowing pleated midi skirt that moves beautifully. Pairs well with fitted tops." },
+            { id: 18, category: "women", name: "Kaftan Dress", price: 28000, img: "https://picsum.photos/seed/women6/600/800", desc: "A breezy, comfortable kaftan dress, perfect for warm days and relaxed gatherings." },
+            { id: 19, category: "women", name: "Denim Set", price: 24000, img: "https://picsum.photos/seed/women7/600/800", desc: "A matching denim top and skirt set for an effortlessly put-together look." },
+            // Children (6)
+            { id: 20, category: "children", name: "Boys Casual Set", price: 10000, img: "https://picsum.photos/seed/kids1/600/800", desc: "A comfortable shirt and shorts set for boys, made from soft, breathable fabric for active play." },
+            { id: 21, category: "children", name: "Girls Party Dress", price: 14000, img: "https://picsum.photos/seed/kids2/600/800", desc: "A pretty, twirl-worthy dress for birthdays and celebrations. Available in a range of sizes." },
+            { id: 22, category: "children", name: "Kids Ankara Outfit", price: 12000, img: "https://picsum.photos/seed/kids3/600/800", desc: "A colourful Ankara outfit for children, perfect for family events and celebrations." },
+            { id: 23, category: "children", name: "Toddler Romper", price: 8000, img: "https://picsum.photos/seed/kids4/600/800", desc: "A soft, easy-to-wear romper for toddlers. Gentle on the skin and easy to move in." },
+            { id: 24, category: "children", name: "School Uniform Set", price: 9000, img: "https://picsum.photos/seed/kids5/600/800", desc: "A durable, well-stitched school uniform set built to last through the term." },
+            { id: 25, category: "children", name: "Kids Sneakers Outfit Set", price: 11000, img: "https://picsum.photos/seed/kids6/600/800", desc: "A coordinated casual outfit set for kids, comfortable enough for school runs and playdates." }
+        ];
+
+        const categoryLabels = { perfume: "Fragrance Collection", men: "Men's Wear", women: "Women's Wear", children: "Children's Wear" };
+
+        function formatNaira(amount) {
+            return "₦" + amount.toLocaleString("en-NG");
         }
 
-        // Scroll Animation logic
-        const observerOptions = {
-            threshold: 0.1
+        function renderProducts(filter) {
+            const grid = document.getElementById("product-grid");
+            grid.innerHTML = "";
+            const list = filter === "all" ? products : products.filter(p => p.category === filter);
+            list.forEach((p, i) => {
+                const card = document.createElement("div");
+                card.className = "product-card reveal-on-scroll active group cursor-pointer";
+                card.style.transitionDelay = (Math.min(i, 8) * 60) + "ms";
+                card.onclick = () => openProductModal(p.id);
+                card.innerHTML = `
+                    <div class="aspect-[3/4] bg-surface-container-low mb-4 overflow-hidden">
+                        <img src="${p.img}" alt="${p.name}" class="product-img w-full h-full object-cover transition-transform duration-700"/>
+                    </div>
+                    <p class="font-label-caps text-label-caps text-primary uppercase tracking-widest mb-1">${categoryLabels[p.category]}</p>
+                    <h3 class="font-headline-sm text-headline-sm leading-snug">${p.name}</h3>
+                    <p class="font-label-caps text-label-caps text-secondary mt-2">${formatNaira(p.price)}</p>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterProducts(filter, btn) {
+            document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            renderProducts(filter);
+        }
+
+        // ---- Product Modal ----
+        function openProductModal(id) {
+            const p = products.find(x => x.id === id);
+            if (!p) return;
+            document.getElementById("modal-img").src = p.img;
+            document.getElementById("modal-img").alt = p.name;
+            document.getElementById("modal-category").innerText = categoryLabels[p.category];
+            document.getElementById("modal-name").innerText = p.name;
+            document.getElementById("modal-price").innerText = formatNaira(p.price);
+            document.getElementById("modal-desc").innerText = p.desc;
+            const message = `Hello Glitter Bliss Vestiti, I'm interested in the "${p.name}" (${formatNaira(p.price)}). Is it available?`;
+            document.getElementById("modal-whatsapp-link").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+            document.getElementById("product-modal").classList.add("open");
+            document.body.style.overflow = "hidden";
+        }
+        function closeProductModal() {
+            document.getElementById("product-modal").classList.remove("open");
+            document.body.style.overflow = "";
+        }
+
+        // ---- Info Modal ----
+        const infoContent = {
+            privacy: {
+                eyebrow: "Store Policy",
+                title: "Privacy Policy",
+                body: [
+                    "Glitter Bliss Vestiti does not require you to create an account or sign up to browse or shop with us.",
+                    "When you contact us through the WhatsApp button or the contact form, we only receive the details you choose to share — such as your name, phone number and order message — and we use this solely to process your order and communicate with you.",
+                    "We do not sell or share your information with third parties. Your details are kept private and used only for order fulfilment and customer support."
+                ]
+            },
+            terms: {
+                eyebrow: "Store Policy",
+                title: "Terms of Service",
+                body: [
+                    "All prices listed are in Nigerian Naira (₦) and are subject to change without prior notice.",
+                    "Orders are placed and confirmed directly through WhatsApp. Once you message us about a product, we'll confirm availability, size/quantity and delivery details before payment.",
+                    "Payment is required before an order is shipped or handed over, unless otherwise agreed with our team.",
+                    "By ordering from us, you agree to provide accurate contact and delivery information so we can fulfil your order smoothly."
+                ]
+            },
+            shipping: {
+                eyebrow: "Store Policy",
+                title: "Shipping & Returns",
+                body: [
+                    "We deliver nationwide across Nigeria. Delivery fees and timelines depend on your location and will be shared with you on WhatsApp before you confirm your order.",
+                    "Please inspect your item(s) as soon as they arrive. If there's a size issue, defect, or the wrong item was sent, message us on WhatsApp within 48 hours of delivery.",
+                    "Returns and exchanges are handled on a case-by-case basis and are easiest to arrange the sooner you reach out. Items must be unused, unworn and in their original condition."
+                ]
+            },
+            contact: {
+                eyebrow: "Get In Touch",
+                title: "Contact Us",
+                body: [
+                    "The fastest way to reach us is on WhatsApp: 0816 755 9341.",
+                    "You can also use the contact form on this page — filling it in will open WhatsApp with your message ready to send to us directly.",
+                    "We are based in Nigeria and typically respond within the same day."
+                ]
+            }
         };
 
+        function openInfoModal(key) {
+            const data = infoContent[key];
+            if (!data) return;
+            document.getElementById("info-eyebrow").innerText = data.eyebrow;
+            document.getElementById("info-title").innerText = data.title;
+            document.getElementById("info-body").innerHTML = data.body.map(p => `<p>${p}</p>`).join("");
+            document.getElementById("info-modal").classList.add("open");
+            document.body.style.overflow = "hidden";
+        }
+        function closeInfoModal() {
+            document.getElementById("info-modal").classList.remove("open");
+            document.body.style.overflow = "";
+        }
+
+        // Close modals on overlay click
+        document.getElementById("product-modal").addEventListener("click", (e) => {
+            if (e.target.id === "product-modal") closeProductModal();
+        });
+        document.getElementById("info-modal").addEventListener("click", (e) => {
+            if (e.target.id === "info-modal") closeInfoModal();
+        });
+
+        // ---- Contact Form -> WhatsApp ----
+        document.getElementById("contact-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const name = document.getElementById("cf-name").value.trim();
+            const phone = document.getElementById("cf-phone").value.trim();
+            const item = document.getElementById("cf-item").value.trim();
+            const message = document.getElementById("cf-message").value.trim();
+
+            let text = `Hello Glitter Bliss Vestiti, my name is ${name}.`;
+            if (item) text += ` I'm interested in: ${item}.`;
+            text += ` ${message}`;
+            text += ` (Contact number: ${phone})`;
+
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
+            this.reset();
+        });
+
+        // Mobile menu toggle
+        document.getElementById("mobile-menu-btn").addEventListener("click", function () {
+            document.getElementById("mobile-menu").classList.toggle("hidden");
+            document.getElementById("mobile-menu").classList.toggle("flex");
+        });
+        document.querySelectorAll("#mobile-menu a").forEach(a => a.addEventListener("click", () => {
+            document.getElementById("mobile-menu").classList.add("hidden");
+            document.getElementById("mobile-menu").classList.remove("flex");
+        }));
+
+        // Scroll Animation
+        const observerOptions = { threshold: 0.1 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+                if (entry.isIntersecting) entry.target.classList.add("active");
             });
         }, observerOptions);
+        document.querySelectorAll(".reveal-on-scroll").forEach(el => observer.observe(el));
 
-        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
-
-        // Interaction for Add to Cart
-        document.querySelector('button.group.relative').addEventListener('click', function() {
-            const originalText = this.querySelector('.relative.z-10').innerText;
-            this.querySelector('.relative.z-10').innerText = 'Adding...';
-            setTimeout(() => {
-                this.querySelector('.relative.z-10').innerText = 'Added to Bag';
-                setTimeout(() => {
-                    this.querySelector('.relative.z-10').innerText = originalText;
-                }, 2000);
-            }, 800);
-        });
+        // Init
+        renderProducts("all");
     </script>
 </body></html>
